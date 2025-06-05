@@ -1,0 +1,14 @@
+{
+  "name": "image-generator",
+  "version": "1.0.0",
+  "description": "API para generar imágenes con Sharp en Vercel",
+  "main": "api/generate-image.js",
+  "dependencies": {
+    "express": "^4.19.2",
+    "sharp": "^0.33.4",
+    "axios": "^1.7.2"
+  },
+  "scripts": {
+    "start": "node api/generate-image.js"
+  }
+}
