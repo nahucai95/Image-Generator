@@ -36,16 +36,16 @@ La API acepta los siguientes **parámetros de consulta** (`query parameters`) v�
 
 ### Ejemplos de uso:
 
-Asegúrate de reemplazar `[TU-DOMINIO-VERCEL]` con la URL que Vercel te asigna después del despliegue (ej. `https://image-generator-xxxx.vercel.app`).
+Asegúrate de reemplazar `[TU-DOMINIO-VERCEL]` con la URL que Vercel te asigna después del despliegue (ej. `https://your-app-name.vercel.app`).
 
 1.  **Imagen con etiqueta "EN VIVO" (por defecto):**
-    `https://[TU-DOMINIO-VERCEL]/api/generate-image?imageUrl=https://images.unsplash.com/photo-1542831371-29b0f74f94dd`
+    `https://[TU-DOMINIO-VERCEL]/api/generate-image?imageUrl=https://i.ibb.co/JRTpMKYb/unnamed.png&liveText=EN%20VIVO`
 
 2.  **Imagen con etiqueta "PROXIMO" y dimensiones específicas:**
-    `https://[TU-DOMINIO-VERCEL]/api/generate-image?imageUrl=https://images.unsplash.com/photo-1542831371-29b0f74f94dd&cropWidth=800&cropHeight=450&liveText=PROXIMO`
+    `https://[TU-DOMINIO-VERCEL]/api/generate-image?imageUrl=https://i.ibb.co/JRTpMKYb/unnamed.png&cropWidth=800&cropHeight=450&liveText=PROXIMO`
 
 3.  **Imagen con etiqueta "FINALIZADO":**
-    `https://[TU-DOMINIO-VERCEL]/api/generate-image?imageUrl=https://images.unsplash.com/photo-1542831371-29b0f74f94dd&liveText=FINALIZADO`
+    `https://[TU-DOMINIO-VERCEL]/api/generate-image?imageUrl=https://i.ibb.co/JRTpMKYb/unnamed.png&liveText=FINALIZADO`
 
 ---
 
