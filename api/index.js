@@ -3,8 +3,21 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  // Usa VERCEL_URL para el entorno desplegado, o localhost para desarrollo local
-  const vercelDomain = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
+  let vercelDomain = 'http://localhost:3000'; // Default for local development
+
+  if (process.env.VERCEL_URL) {
+    // VERCEL_URL might be like 'my-project-abcd.vercel.app' or 'my-custom-domain.com'
+    // If it's a Vercel-generated deployment URL, we want the alias part.
+    if (process.env.VERCEL_URL.includes('-') && process.env.VERCEL_URL.endsWith('.vercel.app')) {
+      const parts = process.env.VERCEL_URL.split('-');
+      // Assuming the alias is the first part before the first hyphen in the Vercel-generated URL
+      vercelDomain = `https://${parts[0]}.vercel.app`;
+    } else {
+      // If it's a custom domain or already a clean vercel.app alias
+      vercelDomain = `https://${process.env.VERCEL_URL}`;
+    }
+  }
+
   // URL de imagen de ejemplo, codificada para ser segura en URLs
   const exampleImageUrl = encodeURIComponent('https://i.ibb.co/JRTpMKYb/unnamed.png'); 
 
