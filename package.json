@@ -1,14 +1,23 @@
 {
-  "name": "image-generator",
+  "name": "image-generator-vercel",
   "version": "1.0.0",
-  "description": "API para generar imágenes con Sharp en Vercel",
-  "main": "api/generate-image.js",
-  "dependencies": {
-    "express": "^4.19.2",
-    "sharp": "^0.33.4",
-    "axios": "^1.7.2"
-  },
+  "description": "A Node.js image generator using Sharp, deployable on Vercel.",
+  "main": "api/generate-img.js",
   "scripts": {
-    "start": "node api/generate-image.js"
+    "start": "node api/generate-img.js"
+  },
+  "keywords": [
+    "vercel",
+    "sharp",
+    "image-processing",
+    "nodejs",
+    "serverless"
+  ],
+  "author": "Tu Nombre/Nickname",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "express": "^4.19.2",
+    "sharp": "^0.33.4"
   }
 }

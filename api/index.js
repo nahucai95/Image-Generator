@@ -3,9 +3,10 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  // Use VERCEL_URL for deployed environment, fallback to localhost for local development
+  // Usa VERCEL_URL para el entorno desplegado, o localhost para desarrollo local
   const vercelDomain = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
-  const exampleImageUrl = encodeURIComponent('[https://i.ibb.co/JRTpMKYb/unnamed.png](https://i.ibb.co/JRTpMKYb/unnamed.png)'); // Encode the image URL for safety
+  // URL de imagen de ejemplo, codificada para ser segura en URLs
+  const exampleImageUrl = encodeURIComponent('https://i.ibb.co/JRTpMKYb/unnamed.png'); 
 
   const documentationContent = `
     <!DOCTYPE html>
@@ -52,7 +53,7 @@ app.get('/', (req, res) => {
         <h3>3. Imagen con etiqueta "FINALIZADO":</h3>
         <pre><code>${vercelDomain}/api/generate-image?imageUrl=${exampleImageUrl}&liveText=FINALIZADO</code></pre>
 
-        <p>Para más detalles y el código fuente, consulta el <a href="[https://github.com/nahucai95/Image-Generator/blob/main/README.md](https://github.com/nahucai95/Image-Generator/blob/main/README.md)" target="_blank">README.md en GitHub</a>.</p>
+        <p>Para más detalles y el código fuente, consulta el <a href="https://github.com/nahucai95/Image-Generator/blob/main/README.md" target="_blank">README.md en GitHub</a>.</p>
       </div>
     </body>
     </html>
