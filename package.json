@@ -4,7 +4,7 @@
   "description": "A Node.js image generator using Sharp, deployable on Vercel.",
   "main": "api/generate-img.js",
   "scripts": {
-    "start": "node api/generate-img.js"
+    "start": "node api/index.js"
   },
   "keywords": [
     "vercel",
