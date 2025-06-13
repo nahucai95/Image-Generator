@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  let vercelDomain = 'http://localhost:3000'; // Default for local development
+  let vercelDomain = `http://localhost:${process.env.PORT || 3000}`; // Default for local development
 
   if (process.env.VERCEL_URL) {
     // VERCEL_URL might be like 'my-project-abcd.vercel.app' or 'my-custom-domain.com'
@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
       vercelDomain = `https://${parts[0]}.vercel.app`;
     } else {
       // If it's a custom domain or already a clean vercel.app alias
-      vercelDomain = `https://${process.env.VERCEL_URL}`;
+      vercelDomain = process.env.VERCEL_URL;
     }
   }
 
