@@ -2,6 +2,11 @@
 const express = require('express');
 const app = express();
 
+app.use(express.static('public'));
+
+const generateImageRouter = require('./generate-img');
+app.use('/api/generate-image', generateImageRouter);
+
 app.get('/', (req, res) => {
   let vercelDomain = `http://localhost:${process.env.PORT || 3000}`; // Default for local development
 
