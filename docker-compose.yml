@@ -1,0 +1,11 @@
+services:
+  image-generator:
+    image: ghcr.io/mkcfdc/image-generator:latest
+    container_name: image-generator
+    restart: unless-stopped
+    ports:
+      - "3000:3000"    # adjust if your app listens on a different port
+    environment:
+      - NODE_ENV=production
+      - VERCEL_URL=http://localhost:3000
+      # - PORT=3000     # uncomment if your app reads PORT from env

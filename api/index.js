@@ -2,8 +2,13 @@
 const express = require('express');
 const app = express();
 
+app.use(express.static('public'));
+
+const generateImageRouter = require('./generate-img');
+app.use('/api/generate-image', generateImageRouter);
+
 app.get('/', (req, res) => {
-  let vercelDomain = 'http://localhost:3000'; // Default for local development
+  let vercelDomain = `http://localhost:${process.env.PORT || 3000}`; // Default for local development
 
   if (process.env.VERCEL_URL) {
     // VERCEL_URL might be like 'my-project-abcd.vercel.app' or 'my-custom-domain.com'
@@ -14,7 +19,7 @@ app.get('/', (req, res) => {
       vercelDomain = `https://${parts[0]}.vercel.app`;
     } else {
       // If it's a custom domain or already a clean vercel.app alias
-      vercelDomain = `https://${process.env.VERCEL_URL}`;
+      vercelDomain = process.env.VERCEL_URL;
     }
   }
 
@@ -73,6 +78,37 @@ app.get('/', (req, res) => {
   `;
   res.setHeader('Content-Type', 'text/html');
   res.send(documentationContent);
+});
+
+const port = parseInt(process.env.PORT, 10) || 3000;
+const server = app.listen(port, () => {
+  console.log(`Server is UP and running on http://localhost:${port}`);
+});
+
+// 2. Log any errors emitted by the HTTP server
+server.on('error', (err) => {
+  console.error('Server error:', err);
+});
+
+// 3. Graceful shutdown logging
+const shutdown = (signal) => {
+  console.log(`Received ${signal}, shutting down server…`);
+  server.close(() => {
+    console.log('Server has stopped.');
+    process.exit(0);
+  });
+};
+process.on('SIGINT',  () => shutdown('SIGINT'));
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+
+// 4. Catch any uncaught exceptions or promise rejections
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  // you might want to exit or restart the process here
+});
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  // you might want to exit or restart the process here
 });
 
 module.exports = app;

@@ -1,11 +1,9 @@
 const express = require('express');
 const sharp = require('sharp');
 const axios = require('axios');
-const app = express();
+const router = express.Router();
 
-app.use(express.static('public'));
-
-app.get('/api/generate-image', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const { imageUrl, cropWidth, cropHeight, liveText } = req.query;
 
@@ -89,4 +87,4 @@ app.get('/api/generate-image', async (req, res) => {
     }
 });
 
-module.exports = app;
+module.exports = router;
