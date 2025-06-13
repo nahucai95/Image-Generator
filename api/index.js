@@ -75,4 +75,35 @@ app.get('/', (req, res) => {
   res.send(documentationContent);
 });
 
+const port = parseInt(process.env.PORT, 10) || 3000;
+const server = app.listen(port, () => {
+  console.log(`Server is UP and running on http://localhost:${port}`);
+});
+
+// 2. Log any errors emitted by the HTTP server
+server.on('error', (err) => {
+  console.error('Server error:', err);
+});
+
+// 3. Graceful shutdown logging
+const shutdown = (signal) => {
+  console.log(`Received ${signal}, shutting down server…`);
+  server.close(() => {
+    console.log('Server has stopped.');
+    process.exit(0);
+  });
+};
+process.on('SIGINT',  () => shutdown('SIGINT'));
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+
+// 4. Catch any uncaught exceptions or promise rejections
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  // you might want to exit or restart the process here
+});
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  // you might want to exit or restart the process here
+});
+
 module.exports = app;
